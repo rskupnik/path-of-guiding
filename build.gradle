@@ -11,6 +11,7 @@ allprojects {
 dependencies {
     implementation project(':pog-ui')
     implementation project(':pog-parser')
+    implementation project(':pog-commons')
 }
 
 mainClassName = 'com.github.rskupnik.pog.PathOfGuiding'

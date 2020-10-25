@@ -2,3 +2,4 @@ rootProject.name = 'path-of-guiding'
 
 include 'pog-ui'
 include 'pog-parser'
+include 'pog-commons'

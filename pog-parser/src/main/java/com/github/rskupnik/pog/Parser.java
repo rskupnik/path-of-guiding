@@ -1,7 +1,10 @@
 package com.github.rskupnik.pog;
 
+import com.github.rskupnik.pog.commons.Trigger;
+
 import java.io.*;
-import java.util.Scanner;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -17,6 +20,7 @@ public class Parser {
     }
 
     private boolean exit = false;
+    private final BlockingQueue<Trigger> triggersQueue = new ArrayBlockingQueue<>(1024);
 
     private Parser() {
         
@@ -32,7 +36,7 @@ public class Parser {
                 while (!exit) {
                     String line;
                     while ((line = br.readLine()) != null) {
-                        System.out.println(line);
+                        identifyTrigger(line);
                     }
                     Thread.sleep(1000);
                 }
@@ -40,5 +44,13 @@ public class Parser {
                 e.printStackTrace();
             }
         });
+    }
+
+    public BlockingQueue<Trigger> getTriggersQueue() {
+        return triggersQueue;
+    }
+
+    private void identifyTrigger(String line) throws InterruptedException {
+        triggersQueue.put(new Trigger(line));
     }
 }
