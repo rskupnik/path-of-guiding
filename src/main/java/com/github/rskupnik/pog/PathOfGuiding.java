@@ -1,11 +1,15 @@
 package com.github.rskupnik.pog;
 
-import java.nio.file.Path;
-
 public class PathOfGuiding {
 
+    private static final String HARDCODED_POE_LOCATION = "C:/app/poe-test";
+
     private void start() {
-        UIBoot.boot();
+        Parser.getInstance().startScanning(HARDCODED_POE_LOCATION);
+        //UIBoot.boot();
+        while (true) {
+
+        }
     }
 
     public static void main(String[] args) {
