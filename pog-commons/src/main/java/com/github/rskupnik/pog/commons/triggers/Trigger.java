@@ -1,8 +1,8 @@
-package com.github.rskupnik.pog.commons;
+package com.github.rskupnik.pog.commons.triggers;
 
-public class Trigger {
+public abstract class Trigger {
 
-    private final String fullLine;
+    protected final String fullLine;
 
     public Trigger(String fullLine) {
         this.fullLine = fullLine;
