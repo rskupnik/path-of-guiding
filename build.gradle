@@ -13,6 +13,8 @@ dependencies {
     implementation project(':pog-logs-parser')
     implementation project(':pog-commons')
     implementation project(':pog-build-loader')
+
+    compile 'io.vavr:vavr:0.10.3'
 }
 
 mainClassName = 'com.github.rskupnik.pog.PathOfGuiding'

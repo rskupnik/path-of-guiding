@@ -1,10 +1,8 @@
 package com.github.rskupnik.pog;
 
 import com.github.rskupnik.pog.build.BuildLoader;
-import com.github.rskupnik.pog.build.model.Build;
-import com.github.rskupnik.pog.commons.triggers.AreaTrigger;
-import com.github.rskupnik.pog.commons.triggers.LevelTrigger;
-import com.github.rskupnik.pog.commons.triggers.Trigger;
+import com.github.rskupnik.pog.build.model.BuildDef;
+import io.vavr.control.Either;
 
 import java.util.Optional;
 
@@ -41,8 +39,8 @@ public class PathOfGuiding {
 //                System.out.println(trigger.getFullLine());
 //            }
 //        }
-        Optional<Build> build = BuildLoader.getInstance().load(SAMPLE_JSON);
-        System.out.println(build.get());
+        BuildDef build = BuildLoader.getInstance().load(SAMPLE_JSON).getOrElseThrow(t -> t);
+        System.out.println(build);
     }
 
     public static void main(String[] args) throws Exception {
