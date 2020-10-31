@@ -1,6 +1,6 @@
 rootProject.name = 'path-of-guiding'
 
-include 'pog-ui'
-include 'pog-logs-parser'
-include 'pog-commons'
-include 'pog-build-loader'
+include 'core'
+include 'ui'
+include 'log-scanner'
+include 'build-loader'
