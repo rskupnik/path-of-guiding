@@ -2,6 +2,9 @@ package com.github.rskupnik.pog;
 
 import com.github.rskupnik.pog.build.BuildLoader;
 import com.github.rskupnik.pog.build.model.BuildDef;
+import com.github.rskupnik.pog.commons.triggers.AreaTrigger;
+import com.github.rskupnik.pog.commons.triggers.LevelTrigger;
+import com.github.rskupnik.pog.commons.triggers.Trigger;
 import io.vavr.control.Either;
 
 import java.util.Optional;
@@ -41,6 +44,21 @@ public class PathOfGuiding {
 //        }
         BuildDef build = BuildLoader.getInstance().load(SAMPLE_JSON).getOrElseThrow(t -> t);
         System.out.println(build);
+
+        Parser.getInstance().startScanning(HARDCODED_POE_LOCATION);
+        while (true) {
+            while (!Parser.getInstance().getTriggersQueue().isEmpty()) {
+                Trigger trigger = Parser.getInstance().getTriggersQueue().take();
+                if (trigger instanceof LevelTrigger) {
+                    LevelTrigger levelTrigger = (LevelTrigger) trigger;
+                    System.out.println(levelTrigger.getLevel());
+                } else if (trigger instanceof AreaTrigger) {
+                    AreaTrigger areaTrigger = (AreaTrigger) trigger;
+                    System.out.println(areaTrigger.getArea());
+                }
+                System.out.println(trigger.getFullLine());
+            }
+        }
     }
 
     public static void main(String[] args) throws Exception {
