@@ -1,7 +1,7 @@
-package com.github.rskupnik.pog.buildscanner;
+package com.github.rskupnik.pog.buildloader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.rskupnik.pog.buildscanner.model.BuildDef;
+import com.github.rskupnik.pog.buildloader.model.BuildDef;
 import com.github.rskupnik.pog.core.domain.BuildDefinition;
 import com.github.rskupnik.pog.core.ports.BuildLoader;
 import io.vavr.control.Either;

@@ -1,4 +1,4 @@
-package com.github.rskupnik.pog.buildscanner.model;
+package com.github.rskupnik.pog.buildloader.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
