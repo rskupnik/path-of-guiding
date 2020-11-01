@@ -19,7 +19,7 @@ dependencies {
     implementation project(':build-loader')
 
     compile 'io.vavr:vavr:0.10.3'
-    compile 'com.google.inject:guice:4.1.0'
+    compile 'com.google.inject:guice:5.0.0-BETA-1'
 }
 
-mainClassName = 'com.github.rskupnik.pog.PathOfGuiding'
+mainClassName = 'com.github.rskupnik.pog.POGApp'

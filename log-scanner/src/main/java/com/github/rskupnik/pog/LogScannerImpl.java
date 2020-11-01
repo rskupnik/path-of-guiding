@@ -1,34 +1,24 @@
 package com.github.rskupnik.pog;
 
-import com.github.rskupnik.pog.commons.triggers.Trigger;
-import com.github.rskupnik.pog.commons.triggers.Triggers;
+import com.github.rskupnik.pog.core.domain.Trigger;
+import com.github.rskupnik.pog.core.ports.LogScanner;
+import io.vavr.control.Try;
 
-import java.io.*;
-import java.util.Optional;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class Parser {
-
-    private static Parser INSTANCE;
-
-    public static Parser getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new Parser();
-        }
-        return INSTANCE;
-    }
+public class LogScannerImpl implements LogScanner {
 
     private boolean exit = false;
     private final BlockingQueue<Trigger> triggersQueue = new ArrayBlockingQueue<>(1024);
 
-    private Parser() {
-        
-    }
-
-    public void startScanning(String poeFolder) {
+    public Try<Void> startScan(String poeFolder) {
         Executor executor = Executors.newSingleThreadExecutor();
         String fileLocation = poeFolder + "/logs/Client.txt";
         executor.execute(() -> {
@@ -46,19 +36,15 @@ public class Parser {
                 e.printStackTrace();
             }
         });
+
+        return Try.success(null);
     }
 
-    public BlockingQueue<Trigger> getTriggersQueue() {
+    public BlockingQueue<Trigger> getQueue() {
         return triggersQueue;
     }
 
     private void identifyTrigger(String line) {
-        Triggers.matchLine(line).ifPresent(t -> {
-            try {
-                triggersQueue.put(t);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
+        // TODO: Figure this out
     }
 }

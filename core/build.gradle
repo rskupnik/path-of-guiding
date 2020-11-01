@@ -1,2 +1,5 @@
 apply plugin: 'java-library'
 
+dependencies {
+    compile 'io.vavr:vavr:0.10.3'
+}
