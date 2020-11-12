@@ -1,6 +1,7 @@
 package com.github.rskupnik.pog.core;
 
 
+import com.github.rskupnik.pog.core.domain.Trigger;
 import com.github.rskupnik.pog.core.ports.BuildLoader;
 import com.github.rskupnik.pog.core.ports.LogScanner;
 import com.github.rskupnik.pog.core.ports.UI;
@@ -37,6 +38,17 @@ public class PathOfGuiding {
 
     public void start() {
         System.out.println("Hello, World");
+
+        logScanner.startScan(HARDCODED_POE_LOCATION);
+
+        try {
+            while (!logScanner.getQueue().isEmpty()) {
+                Trigger trigger = logScanner.getQueue().take();
+                System.out.println(trigger);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         //Parser.getInstance().startScanning(HARDCODED_POE_LOCATION);
         //UIBoot.boot();
