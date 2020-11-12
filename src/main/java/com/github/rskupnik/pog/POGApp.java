@@ -7,7 +7,7 @@ import com.google.inject.Injector;
 
 public class POGApp {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Injector injector = Guice.createInjector(new PogModule());
         PathOfGuiding pog = injector.getInstance(PathOfGuiding.class);
         pog.start();

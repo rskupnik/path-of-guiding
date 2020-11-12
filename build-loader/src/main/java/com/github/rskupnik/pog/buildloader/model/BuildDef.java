@@ -2,8 +2,10 @@ package com.github.rskupnik.pog.buildloader.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.rskupnik.pog.core.domain.BuildDefinition;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BuildDef {
 
@@ -23,5 +25,9 @@ public class BuildDef {
 
     public List<TriggerDef> getTriggers() {
         return triggers;
+    }
+
+    public BuildDefinition toDefinition() {
+        return new BuildDefinition(name, triggers.stream().map(TriggerDef::toDefinition).collect(Collectors.toList()));
     }
 }

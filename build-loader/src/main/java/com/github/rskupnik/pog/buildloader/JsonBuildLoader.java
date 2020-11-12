@@ -11,11 +11,10 @@ public class JsonBuildLoader implements BuildLoader {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public Either<Exception, BuildDefinition> load(String input) {
-//        try {
-//            return Either.right(objectMapper.readValue(input, BuildDef.class)); // TODO: Convert BuildDef (BuildJSON?) to BuildDefinition
-//        } catch (Exception e) {
-//            return Either.left(e);
-//        }
-        return null;
+        try {
+            return Either.right(objectMapper.readValue(input, BuildDef.class).toDefinition());
+        } catch (Exception e) {
+            return Either.left(e);
+        }
     }
 }

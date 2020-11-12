@@ -1,6 +1,8 @@
 package com.github.rskupnik.pog.core;
 
 
+import com.github.rskupnik.pog.core.domain.BuildDefinition;
+import com.github.rskupnik.pog.core.domain.LevelTrigger;
 import com.github.rskupnik.pog.core.domain.Trigger;
 import com.github.rskupnik.pog.core.ports.BuildLoader;
 import com.github.rskupnik.pog.core.ports.LogScanner;
@@ -23,7 +25,7 @@ public class PathOfGuiding {
             }
     """;
 
-    private static final String HARDCODED_POE_LOCATION = "C:/app/poe-test";
+    private static final String HARDCODED_POE_LOCATION = "C:/app/steam/steamapps/common/Path of Exile";
 
     private final LogScanner logScanner;
     private final BuildLoader buildLoader;
@@ -36,15 +38,19 @@ public class PathOfGuiding {
         this.ui = ui;
     }
 
-    public void start() {
-        System.out.println("Hello, World");
+    public void start() throws Exception {
+        BuildDefinition build = buildLoader.load(SAMPLE_JSON).getOrElseThrow(t -> t);
+        System.out.println(build);
 
         logScanner.startScan(HARDCODED_POE_LOCATION);
 
         try {
             while (!logScanner.getQueue().isEmpty()) {
                 Trigger trigger = logScanner.getQueue().take();
-                System.out.println(trigger);
+                System.out.println(trigger.getMessage());
+                if (trigger instanceof LevelTrigger) {
+                    System.out.println(((LevelTrigger) trigger).getLevel());
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
