@@ -6,3 +6,7 @@ javafx {
     version = "14"
     modules = [ 'javafx.controls' ]
 }
+
+dependencies {
+    implementation project(':core')
+}

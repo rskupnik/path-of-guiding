@@ -1,6 +1,12 @@
 package com.github.rskupnik.pog.core;
 
 
+import com.github.rskupnik.pog.core.ports.BuildLoader;
+import com.github.rskupnik.pog.core.ports.LogScanner;
+import com.github.rskupnik.pog.core.ports.UI;
+
+import javax.inject.Inject;
+
 public class PathOfGuiding {
 
     private static final String SAMPLE_JSON = """
@@ -17,6 +23,17 @@ public class PathOfGuiding {
     """;
 
     private static final String HARDCODED_POE_LOCATION = "C:/app/poe-test";
+
+    private final LogScanner logScanner;
+    private final BuildLoader buildLoader;
+    private final UI ui;
+
+    @Inject
+    public PathOfGuiding(LogScanner logScanner, BuildLoader buildLoader, UI ui) {
+        this.logScanner = logScanner;
+        this.buildLoader = buildLoader;
+        this.ui = ui;
+    }
 
     public void start() {
         System.out.println("Hello, World");
@@ -53,9 +70,5 @@ public class PathOfGuiding {
 //                System.out.println(trigger.getFullLine());
 //            }
 //        }
-    }
-
-    public static void main(String[] args) throws Exception {
-        new PathOfGuiding().start();
     }
 }
